@@ -52,7 +52,8 @@ function QuizGame() {
         }
         squares[attempts - 1] = '🟩';
 
-        const shareText = `Craque do Dia\n${squares.join('')}`;
+        const address = window.location.href;
+        const shareText = `Craque do Dia\n${squares.join('')}. Jogue voce também em ${address}!`;
 
         return (
             <button
