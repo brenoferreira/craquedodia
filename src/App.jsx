@@ -53,7 +53,7 @@ function QuizGame() {
         squares[attempts - 1] = '🟩';
 
         const address = window.location.href;
-        const shareText = `Craque do Dia\n${squares.join('')}. Jogue voce também em ${address}!`;
+        const shareText = `🎩 Craque do Dia 🎩\n${squares.join('')}.\nJogue voce também em ${address}!`;
 
         return (
             <button
