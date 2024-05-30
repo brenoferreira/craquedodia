@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import './App.css'
 
 const quiz = [
-    "Este jogador de basquete nasceu em Nova York, EUA",
-    "Durante sua carreira, ele ganhou seis campeonatos da NBA e foi nomeado MVP das finais seis vezes.",
-    "Ele é conhecido por sua carreira brilhante na NBA, onde jogou principalmente pelo Chicago Bulls.",
+    "Este atleta nasceu em Nova York, EUA",
+    "Durante sua carreira, ele ganhou varios campeonatos da NBA e foi nomeado MVP várias vezes.",
     "Seu número icônico, 23, é amplamente reconhecido e associado ao seu legado no esporte.",
+    "Ele onde jogou principalmente pelo Chicago Bulls.",
     "Ele também jogou uma temporada de beisebol profissional durante um intervalo em sua carreira no basquete.",
     "Fora das quadras, ele é famoso por sua marca de calçados e roupas, que é extremamente popular em todo o mundo.",
-  ];
+];
 
 function QuizGame() {
     const [currentQuestion, setCurrentQuestion] = useState(0);
