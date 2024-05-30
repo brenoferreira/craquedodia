@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import './App.css'
 
-const quizFred = [
-    "Este jogador começou sua carreira profissional no América Mineiro antes de se transferir para um clube maior na Europa. Quem é ele?",
-    "Ele jogou na Ligue 1, na França, pelo Lyon, onde conquistou múltiplos títulos nacionais. Quem é este jogador?",
-    "Depois de voltar ao Brasil, ele se tornou um dos maiores ídolos de um clube carioca, onde teve uma carreira prolífica como atacante. Quem é esse jogador?",
-    "Ele foi artilheiro do Campeonato Brasileiro Série A em 2012, ajudando seu time a ganhar o título naquele ano. Quem é ele?",
-    "Ele foi o artilheiro da Copa das Confederações da FIFA em 2013, ajudando o Brasil a vencer o torneio. Quem é ele?",
-    "Ele é o segundo maior artilheiro da história do Fluminense em jogos oficiais, com mais de 180 gols pelo clube. Quem é esse jogador?"
-];
+const quiz = [
+    "Este jogador de basquete nasceu em Nova York, EUA",
+    "Durante sua carreira, ele ganhou seis campeonatos da NBA e foi nomeado MVP das finais seis vezes.",
+    "Ele é conhecido por sua carreira brilhante na NBA, onde jogou principalmente pelo Chicago Bulls.",
+    "Seu número icônico, 23, é amplamente reconhecido e associado ao seu legado no esporte.",
+    "Ele também jogou uma temporada de beisebol profissional durante um intervalo em sua carreira no basquete.",
+    "Fora das quadras, ele é famoso por sua marca de calçados e roupas, que é extremamente popular em todo o mundo.",
+  ];
 
 function QuizGame() {
     const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -16,25 +16,39 @@ function QuizGame() {
     const [feedback, setFeedback] = useState('');
     const [gameOver, setGameOver] = useState(false);
     const [gameWon, setGameWon] = useState(false);
+    const [attempts, setAttempts] = useState([]);
     const correctAnswer = 'Fred';
-    const maxQuestions = quizFred.length;
+    const maxQuestions = quiz.length;
 
     const handleGuess = () => {
+        if (userGuess.trim() === '') {
+            return;
+        }
         if (userGuess.trim().toLowerCase() === correctAnswer.toLowerCase()) {
             setFeedback('Parabéns! Você acertou!');
             setGameWon(true);
             setGameOver(true);
+            setAttempts([...attempts, '🟩']);
         } else {
             if (currentQuestion < maxQuestions - 1) {
                 setFeedback('Resposta incorreta. Tente novamente.');
                 setCurrentQuestion(currentQuestion + 1);
+                setAttempts([...attempts, '🟥']);
             } else {
                 setFeedback('Você errou todas as perguntas. O jogo acabou.');
                 setGameOver(true);
+                setAttempts([...attempts, '🟥']);
             }
         }
         setUserGuess('');
     };
+
+    const skipQuestion = () => {
+        if (currentQuestion < maxQuestions - 1) {
+            setCurrentQuestion(currentQuestion + 1);
+            setAttempts([...attempts, '⬛']);
+        }
+    }
 
     const handleRestart = () => {
         setCurrentQuestion(0);
@@ -42,18 +56,14 @@ function QuizGame() {
         setFeedback('');
         setGameOver(false);
         setGameWon(false);
+        setAttempts([]);
     };
 
     const renderShareButton = () => {
-        const attempts = currentQuestion + 1;
-        const squares = Array(maxQuestions).fill('⬜');
-        for (let i = 0; i < attempts - 1; i++) {
-            squares[i] = '⬛';
-        }
-        squares[attempts - 1] = '🟩';
-
+        const squares = [...attempts, ...Array(maxQuestions - attempts.length).fill('⬜')];
         const address = window.location.href;
-        const shareText = `🎩 Craque do Dia 🎩\n${squares.join('')}.\nJogue voce também em ${address}!`;
+
+        const shareText = `${squares.join('')}\nJogue voce também em ${address}!`;
 
         return (
             <button
@@ -79,23 +89,30 @@ function QuizGame() {
             {gameOver ? (
                 <div>
                     <p>{feedback}</p>
-                    {gameWon && renderShareButton()}
+                    {renderShareButton()}
                     <button onClick={handleRestart}>Recomeçar Jogo</button>
                 </div>
             ) : (
-                <div>
-                    {quizFred.slice(0, currentQuestion + 1).map((question, index) => (
-                        <p key={index}>{question}</p>
+                <form>
+                    <ul className='tips'>
+                    {quiz.slice(0, currentQuestion + 1).map((question, index) => (
+                        <li className="tip" key={index}>
+                            {question}
+                        </li>
                     ))}
-                    <input
-                        type="text"
-                        value={userGuess}
-                        onChange={(e) => setUserGuess(e.target.value)}
-                        placeholder="Digite seu palpite"
-                    />
-                    <button onClick={handleGuess}>Enviar</button>
-                    <p>{feedback}</p>
-                </div>
+                    </ul>
+                    <div className='controls'>
+                        <button type='button' onClick={skipQuestion}>Pular</button>
+                        <input
+                            type="text"
+                            value={userGuess}
+                            onChange={(e) => setUserGuess(e.target.value)}
+                            placeholder="Digite seu palpite"
+                        />
+                        <button type='button' onClick={handleGuess}>Enviar</button>
+                        <p>{feedback}</p>
+                    </div>
+                </form>
             )}
         </div>
     );
