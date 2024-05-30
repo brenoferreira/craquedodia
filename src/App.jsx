@@ -89,8 +89,10 @@ function QuizGame() {
             {gameOver ? (
                 <div>
                     <p>{feedback}</p>
-                    {renderShareButton()}
-                    <button onClick={handleRestart}>Recomeçar Jogo</button>
+                    <div className="controls">
+                        {renderShareButton()}
+                        <button onClick={handleRestart}>Recomeçar Jogo</button>
+                    </div>
                 </div>
             ) : (
                 <form>
