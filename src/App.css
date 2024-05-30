@@ -1,6 +1,5 @@
 body {
   display: block;
-  background: linear-gradient(90deg, rgba(227,103,42,0.60) 37%, rgba(6,170,72,0.60) 57%);
 }
 
 #root {
@@ -32,6 +31,16 @@ body {
   justify-content: center;
   gap: .75rem;
   margin-top: 2rem;
+}
+
+.guess {
+  background-color: #06AA48;
+  color: #fff;
+}
+
+.skip {
+  background-color: #ff7400;
+  color: #fff;
 }
 
 input[type="text"] {

@@ -104,14 +104,14 @@ function QuizGame() {
                     ))}
                     </ul>
                     <div className='controls'>
-                        <button type='button' onClick={skipQuestion}>Pular</button>
+                        <button className='skip' type='button' onClick={skipQuestion}>Pular</button>
                         <input
                             type="text"
                             value={userGuess}
                             onChange={(e) => setUserGuess(e.target.value)}
                             placeholder="Digite seu palpite"
                         />
-                        <button type='button' onClick={handleGuess}>Enviar</button>
+                        <button className='guess' type='button' onClick={handleGuess}>Enviar</button>
                         <p>{feedback}</p>
                     </div>
                 </form>
