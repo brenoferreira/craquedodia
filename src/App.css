@@ -12,9 +12,9 @@ body {
 }
 
 .tips {
-  list-style: auto;
   list-style-position: inside;
   list-style-type: decimal;
+  padding: 0;
 }
 
 .tip {
