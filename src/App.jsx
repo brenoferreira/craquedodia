@@ -111,7 +111,7 @@ function QuizGame() {
                             onChange={(e) => setUserGuess(e.target.value)}
                             placeholder="Digite seu palpite"
                         />
-                        <button className='guess' type='button' onClick={handleGuess}>Enviar</button>
+                        <button className='guess' type='button' onClick={handleGuess}>Advinhar</button>
                         <p>{feedback}</p>
                     </div>
                 </form>
