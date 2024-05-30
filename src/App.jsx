@@ -17,7 +17,7 @@ function QuizGame() {
     const [gameOver, setGameOver] = useState(false);
     const [gameWon, setGameWon] = useState(false);
     const [attempts, setAttempts] = useState([]);
-    const correctAnswer = 'Fred';
+    const correctAnswer = 'Michael Jordan';
     const maxQuestions = quiz.length;
 
     const handleGuess = () => {
